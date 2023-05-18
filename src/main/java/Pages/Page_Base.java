@@ -1,21 +1,14 @@
 package Pages;
-
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 public class Page_Base {
 
-    protected WebDriver drvier ;
-    public JavascriptExecutor jse ;
-    public Select select ;
-    public Actions action ;
+   // protected WebDriver driver ;
 
     // create constructor
-    public Page_Base(WebDriver driver)
+    public Page_Base( WebDriver driver)
     {
         PageFactory.initElements(driver, this);
     }
@@ -25,20 +18,5 @@ public class Page_Base {
         button.click();
     }
 
-    protected static void setTextElementText(WebElement textElement , String value)
-    {
-        textElement.sendKeys(value);
-    }
-
-    public void scrollToBottom()
-
-    {
-        jse.executeScript("scrollBy(0,2500)");
-    }
-
-    public void clearText(WebElement element)
-    {
-        element.clear();
-    }
 
 }

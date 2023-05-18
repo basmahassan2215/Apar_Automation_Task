@@ -1,5 +1,4 @@
 package Tests;
-
 import ScreenShotCode.Screen_Shot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,6 +8,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class Test_Base {
 
@@ -16,8 +16,7 @@ public class Test_Base {
 
     public static String downloadPath = System.getProperty("user.dir") + "\\Downloads";
 
-    public static ChromeOptions chromeOption() {
-        ChromeOptions options = new ChromeOptions();
+    public static ChromeOptions chromeOption() {ChromeOptions options = new ChromeOptions();
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default.content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadPath);
@@ -32,9 +31,16 @@ public class Test_Base {
         if (browserName.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
             driver = new ChromeDriver(chromeOption());
-        } }
+        }
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+        driver.navigate().to("https://subscribe.stctv.com");
+        driver.manage().window().maximize();
 
-        @AfterSuite
+
+    }
+
+        @AfterSuite (enabled = false)
         public void stopDriver()
         {
             driver.quit();
